@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Mail, Phone, Linkedin, Award } from 'lucide-react';
 
 import './Footer.css';
