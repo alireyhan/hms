@@ -1,0 +1,132 @@
+.why-us-section {
+  padding: 4rem 1.5rem;           /* ↓ was 6rem */
+  background: linear-gradient(90deg, #ffffff 0%, #c3d8f4 100%);
+  position: relative;
+}
+
+.why-us-container {
+  max-width: 1200px;               /* ↓ was 1400px — narrower container */
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;             /* ↓ was 4rem */
+}
+
+.section-title {
+  font-size: 2.2rem;               /* ↓ was 2.5rem */
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.8rem 0;
+  letter-spacing: -0.02em;
+}
+
+.section-description {
+  font-size: 1.1rem;               /* ↓ was 1.25rem */
+  color: #64748b;
+  margin: 0;
+}
+
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;                     /* ↓ was 2.5rem */
+}
+
+.reason-card {
+  background: linear-gradient(150deg, #ffffff 0%, #adcdf6 100%);
+  padding: 2rem 1.8rem;            /* ↓ was 3rem 2.5rem */
+  border-radius: 14px;             /* slightly softer */
+  border: 1px solid #E2E8F0;       /* ↓ thinner border */
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.reason-card:hover {
+  transform: translateY(-8px);     /* ↓ less dramatic lift */
+  border-color: #3B82F6;
+  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.18);
+}
+
+.reason-icon {
+  width: 70px;                     /* ↓ was 90px */
+  height: 70px;                    /* ↓ was 90px */
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 1.2rem;           /* ↓ was 1.5rem */
+  transition: transform 0.3s ease;
+  font-size: 1.8rem;               /* smaller icon font if using text icons */
+}
+
+.reason-card:hover .reason-icon {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.reason-title {
+  font-size: 1.35rem;              /* ↓ was 1.5rem */
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.8rem 0;
+}
+
+.reason-description {
+  font-size: 0.95rem;              /* ↓ was 1rem */
+  line-height: 1.65;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ──────────────────────────────────────── */
+/* Responsive adjustments – also tightened  */
+
+@media (max-width: 1024px) {
+  .reasons-grid {
+    grid-template-columns: 1fr 1fr;   /* two columns instead of one */
+    gap: 1.6rem;
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-us-section {
+    padding: 3rem 1rem;
+  }
+
+  .reasons-grid {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+
+  .reason-card {
+    padding: 1.6rem 1.3rem;
+  }
+
+  .reason-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+  }
+
+  .reason-title {
+    font-size: 1.25rem;
+  }
+
+  .reason-description {
+    font-size: 0.92rem;
+  }
+}

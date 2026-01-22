@@ -1,0 +1,226 @@
+.testimonials-section {
+  padding: 4rem 1.5rem;
+ background: linear-gradient(90deg, #ffffff 0%, #c3d8f4 100%);
+  position: relative;
+}
+
+.testimonials-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.7rem 0;
+}
+
+.section-description {
+  font-size: 1.15rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ────────────────────────────────────────────────
+   Marquee – faster animation
+───────────────────────────────────────────────── */
+
+.marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding: 0.7rem 0;
+}
+
+.marquee-track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.8rem;
+
+  animation: slideLeft 11.5s linear infinite;   /* was 14s → noticeably faster */
+  will-change: transform;
+}
+
+.marquee-wrapper:hover .marquee-track,
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ────────────────────────────────────────────────
+   Card – noticeably shorter height
+───────────────────────────────────────────────── */
+
+.testimonial-card {
+  background: linear-gradient(45deg, #ffffff 0%, #adcdf6 100%);
+  padding: 1.2rem 1.7rem;            /* reduced vertical padding */
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.25s ease;
+  flex: 0 0 300px;
+  width: 300px;
+  min-width: 300px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  border-color: #3b82f6;
+  box-shadow: 0 10px 24px rgba(59,130,246,0.14);
+}
+
+.quote-icon {
+  width: 36px;                       /* smaller icon */
+  height: 36px;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3b82f6;
+  margin-bottom: 0.55rem;            /* reduced */
+}
+
+.rating {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 0.55rem;            /* reduced */
+}
+
+.testimonial-quote {
+  font-size: 0.93rem;                /* slightly smaller */
+  line-height: 1.48;                 /* tighter → less height */
+  color: #475569;
+  margin: 0 0 0.9rem 0;              /* reduced bottom margin */
+  font-style: italic;
+  flex: 1;
+}
+
+.testimonial-author {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  padding-top: 0.9rem;               /* reduced */
+  border-top: 1px solid #e2e8f0;
+  margin-top: auto;
+}
+
+.author-avatar {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.author-name {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: #0f172a;
+}
+
+.author-role {
+  font-size: 0.86rem;
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+.author-hospital {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* ────────────────────────────────────────────────
+   Responsive
+───────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .testimonial-card {
+    flex: 0 0 280px;
+    width: 280px;
+    min-width: 280px;
+    padding: 1.15rem 1.6rem;         /* slightly tighter */
+  }
+
+  .marquee-track {
+    gap: 1.6rem;
+    animation-duration: 12s;          /* faster on tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials-section {
+    padding: 3.2rem 1rem;
+  }
+
+  .marquee-wrapper {
+    margin: 0 -1rem;
+  }
+
+  .marquee-track {
+    gap: 1.4rem;
+    animation-duration: 12.5s;        /* faster on mobile */
+  }
+
+  .testimonial-card {
+    flex: 0 0 260px;
+    width: 260px;
+    min-width: 260px;
+    padding: 1.1rem 1.5rem;
+  }
+
+  .quote-icon {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonial-card {
+    flex: 0 0 240px;
+    width: 240px;
+    min-width: 240px;
+    padding: 1rem 1.4rem;
+  }
+
+  .marquee-track {
+    gap: 1.2rem;
+    animation-duration: 13s;
+  }
+
+  .testimonial-quote {
+    font-size: 0.91rem;
+    line-height: 1.45;
+  }
+
+  .quote-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 0.5rem;
+  }
+}
