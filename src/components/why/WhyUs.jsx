@@ -2,7 +2,7 @@ import React from 'react';
 import {  Lock, DollarSign, MapPin } from 'lucide-react';
 import './WhyUs.css';
 
-const whyUs = () => {   
+const WhyUs = () => {   
   const reasons = [
     {
       icon: <MapPin size={32} />,
@@ -45,4 +45,4 @@ const whyUs = () => {
   );
 };
 
-export default whyUs;
+export default WhyUs;
