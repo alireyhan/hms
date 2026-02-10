@@ -1,3 +1,10 @@
+/* ================= GLOBAL ================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /* ================= HEADER ================= */
 .header {
   position: fixed;
@@ -14,11 +21,14 @@
 
   transition: background 0.3s ease, box-shadow 0.3s ease;
 
-  border-radius: 28px;      /* smaller */
-  margin: 12px;             /* smaller */
+  border-radius: 28px;
+  margin: 12px;
+
+  /* Prevent header itself from overflowing viewport */
+  max-width: calc(100vw - 24px);
 }
 
-/* Stronger shadow on scroll (FIXED) */
+/* Stronger shadow on scroll */
 .header.scrolled {
   background: rgba(255, 255, 255, 0.98);
   box-shadow:
@@ -30,12 +40,15 @@
 .header-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0.75rem 1.5rem;   /* smaller */
+  padding: 0.75rem 1.5rem;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;              /* smaller */
+  gap: 1.5rem;
+
+  /* Prevent children from blowing out */
+  min-width: 0;
 }
 
 /* ================= LOGO ================= */
@@ -43,42 +56,57 @@
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
+  flex-shrink: 0; /* Logo never shrinks */
 }
 
 .logo-text {
-  font-size: 1.55rem;       /* smaller */
+  font-size: 1.55rem;
   font-weight: 700;
   background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .logo-subtitle {
-  font-size: 0.65rem;       /* smaller */
+  font-size: 0.65rem;
   color: #64748b;
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* ================= NAV ================= */
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 1.25rem;             /* smaller */
+  gap: 1.25rem;
+
+  /* ── KEY FIX: remove the hard-coded margin-left that caused overflow ── */
+  /* Use flex auto margin instead to push nav to center/right naturally */
   flex: 1;
   justify-content: center;
+
+  /* Allow nav to shrink if viewport is narrow */
+  min-width: 0;
+  flex-wrap: nowrap;
 }
 
 .nav-link {
   color: #475569;
   font-weight: 500;
-  font-size: 0.9rem;        /* smaller */
+  font-size: 0.9rem;
   text-decoration: none;
   position: relative;
-  padding: 0.4rem 0;        /* smaller */
+  padding: 0.4rem 0;
   transition: color 0.3s ease;
+
+  /* Never let a single link wrap or overflow */
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-link::after {
@@ -104,17 +132,22 @@
 .cta-button {
   background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
   color: white;
-  padding: 0.65rem 1.5rem;   /* smaller */
+  padding: 0.65rem 1.5rem;
   border-radius: 8px;
   border: none;
 
   font-weight: 600;
-  font-size: 0.9rem;        /* smaller */
+  font-size: 0.9rem;
   cursor: pointer;
 
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
   transition: transform 0.2s ease, box-shadow 0.3s ease;
   white-space: nowrap;
+  flex-shrink: 0; /* CTA button never shrinks */
+
+  /* Accessible tap target */
+  min-height: 44px;
+  touch-action: manipulation;
 }
 
 .cta-button:hover {
@@ -122,7 +155,11 @@
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
 
-/* ================= MOBILE ================= */
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* ================= MOBILE TOGGLE ================= */
 .mobile-menu-toggle {
   display: none;
   background: none;
@@ -131,6 +168,11 @@
   cursor: pointer;
   padding: 0.5rem;
   transition: color 0.3s ease;
+  flex-shrink: 0;
+  min-height: 44px;
+  min-width: 44px;
+  align-items: center;
+  justify-content: center;
 }
 
 .mobile-menu-toggle:hover {
@@ -138,40 +180,114 @@
 }
 
 /* ================= RESPONSIVE ================= */
-@media (max-width: 1024px) {
+
+/* ── Large desktops: nav centred, all items visible ── */
+@media (min-width: 1280px) {
   .header-nav {
-    gap: 1rem;
+    gap: 1.75rem;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
   }
 }
 
-@media (max-width: 768px) {
-  .header-container {
-    padding: 0.75rem 1rem;
+/* ── Standard desktops / large laptops (1024px–1279px) ── */
+@media (max-width: 1279px) {
+  .header-nav {
+    gap: 1rem;
   }
 
-  .mobile-menu-toggle {
-    display: block;
+  .nav-link {
+    font-size: 0.88rem;
+  }
+
+  .cta-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.88rem;
+  }
+}
+
+/* ── Small laptops / large tablets landscape (900px–1023px) ──
+   Nav is still visible but tighter */
+@media (max-width: 1023px) {
+  .header {
+    border-radius: 22px;
+    margin: 10px;
+    max-width: calc(100vw - 20px);
+  }
+
+  .header-container {
+    gap: 1rem;
+    padding: 0.7rem 1.2rem;
   }
 
   .header-nav {
+    gap: 0.75rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+  }
+
+  .cta-button {
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .logo-text {
+    font-size: 1.4rem;
+  }
+}
+
+/* ── Tablets portrait (768px–899px) ──
+   Nav collapses to hamburger */
+@media (max-width: 899px) {
+  .header {
+    border-radius: 18px;
+    margin: 8px;
+    max-width: calc(100vw - 16px);
+  }
+
+  .header-container {
+    padding: 0.7rem 1rem;
+    gap: 0.75rem;
+  }
+
+  /* Show hamburger */
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  /* Hide desktop nav and CTA */
+  .header-nav {
+    /* Position dropdown flush under the header pill */
     position: fixed;
-    top: 82px;             /* smaller */
-    left: 0;
-    right: 0;
+    /* top = header margin (8px) + header height (~58px) + small gap (6px) */
+    top: calc(8px + 58px + 6px);
+    left: 8px;
+    right: 8px;
 
     background: white;
     flex-direction: column;
-    padding: 1.2rem;       /* smaller */
-    gap: 0.9rem;           /* smaller */
+    align-items: stretch;
+    padding: 1.2rem;
+    gap: 0.5rem;
 
-    border-radius: 18px;   /* smaller */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
 
-    transform: translateY(-120%);
+    /* Hidden state */
+    transform: translateY(-8px);
     opacity: 0;
     pointer-events: none;
 
     transition: transform 0.3s ease, opacity 0.3s ease;
+
+    /* Override flex centering from desktop */
+    flex: unset;
+    justify-content: flex-start;
   }
 
   .header-nav.mobile-open {
@@ -180,11 +296,118 @@
     pointer-events: all;
   }
 
+  .nav-link {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    white-space: normal; /* Allow wrap in dropdown if needed */
+  }
+
+  .nav-link:last-of-type {
+    border-bottom: none;
+  }
+
+  /* Show a CTA inside the mobile menu instead */
+  .header-nav .mobile-cta {
+    display: block;
+    margin-top: 0.5rem;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  /* Hide desktop CTA */
   .cta-button {
     display: none;
   }
 
   .logo-subtitle {
     display: none;
+  }
+}
+
+/* ── Mobile standard (599px and below) ── */
+@media (max-width: 599px) {
+  .header {
+    border-radius: 14px;
+    margin: 6px;
+    max-width: calc(100vw - 12px);
+  }
+
+  .header-container {
+    padding: 0.65rem 0.875rem;
+  }
+
+  .logo-text {
+    font-size: 1.3rem;
+  }
+
+  .header-nav {
+    top: calc(6px + 54px + 6px);
+    left: 6px;
+    right: 6px;
+    border-radius: 14px;
+  }
+}
+
+/* ── Mobile small (below 380px) ── */
+@media (max-width: 379px) {
+  .header {
+    border-radius: 12px;
+    margin: 5px;
+    max-width: calc(100vw - 10px);
+  }
+
+  .logo-text {
+    font-size: 1.2rem;
+  }
+
+  .header-nav {
+    top: calc(5px + 52px + 6px);
+    left: 5px;
+    right: 5px;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+  }
+}
+
+/* ── Landscape phone ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .header {
+    border-radius: 14px;
+    margin: 6px;
+  }
+
+  .header-container {
+    padding: 0.5rem 1rem;
+  }
+
+  /* In landscape, keep nav horizontal if enough space */
+  .header-nav {
+    top: calc(6px + 48px + 4px);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .header-nav,
+  .nav-link,
+  .nav-link::after,
+  .cta-button {
+    transition: none;
   }
 }

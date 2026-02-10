@@ -53,12 +53,12 @@ const Header = () => {
           ))}
         </nav>
 
-        <button 
+        {/* <button 
           className="cta-button"
           onClick={() => alert('Demo request submitted!')}
         >
           Request a Demo
-        </button>
+        </button> */}
 
         <button
           className="mobile-menu-toggle"

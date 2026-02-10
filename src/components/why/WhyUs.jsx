@@ -25,7 +25,7 @@ const WhyUs = () => {
     <section id="why-us" className="why-us-section">
       <div className="why-us-container">
         <div className="section-header">
-          <h2 className="section-title">Built for the Kingdom\'s Healthcare Standards</h2>
+          <h2 className="section-title">Built for the Kingdom's Healthcare Standards</h2>
           <p className="section-description">
             Combining local expertise with world-class technology
           </p>

@@ -20,7 +20,7 @@ const badges = [
           <div className="footer-section">
             <h3 className="footer-brand">HMS</h3>
             <p className="footer-tagline">
-              Next-Generation Hospital Management System built for the Kingdom\'s healthcare standards.
+              Next-Generation Hospital Management System built for the Kingdom's healthcare standards.
             </p>
           </div>
 

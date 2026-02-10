@@ -1,95 +1,102 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { X, Check } from 'lucide-react';
-import './ProblemSolution.css';
+import React, { useEffect, useRef, useState } from "react";
+import { X, Check } from "lucide-react";
+import "./ProblemSolution.css";
 
 const ProblemSolution = () => {
-  const problems = [
+  const data = [
     {
-      title: 'Booking & Telehealth',
-      problem: 'You pay for Okadoc, Vezeeta, or Cura just to manage appointments',
-      solution: 'Integrated Scheduling: appointment booking and patient portal built-in. No extra fees per booking'
+      title: "Booking & Telehealth",
+      problem:
+        "You pay for Okadoc, Vezeeta, or Cura just to manage appointments",
+      solution:
+        "Integrated Scheduling: appointment booking and patient portal built-in. No extra fees per booking",
     },
     {
-      title: 'Billing & Claims',
-      problem: 'You struggle with Klaim or manual portals to handle NPHIES/Insurance',
-      solution: 'Insurance Engine: Direct NPHIES integration for eligibility and claims within the patient\'s file'
+      title: "Billing & Claims",
+      problem:
+        "You struggle with Klaim or manual portals to handle NPHIES/Insurance",
+      solution:
+        "Insurance Engine: Direct NPHIES integration for eligibility and claims within the patient’s file",
     },
     {
-      title: 'Inventory & ERP',
-      problem: 'You use AFAS, Viindoo, or Aumet separately for pharmacy stock',
-      solution: 'One Inventory: Pharmacy stock automatically updates when a doctor prescribes medication'
-    }
+      title: "Inventory & ERP",
+      problem:
+        "You use AFAS, Viindoo, or Aumet separately for pharmacy stock",
+      solution:
+        "One Inventory: Pharmacy stock updates automatically when a doctor prescribes medication",
+    },
   ];
 
   const sectionRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          setIsVisible(entry.isIntersecting);
-        });
-      },
+      ([entry]) => setVisible(entry.isIntersecting),
       { threshold: 0.3 }
     );
 
-    const currentRef = sectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section ref={sectionRef} id="problem-solution" className={`problem-solution-section ${isVisible ? 'show' : ''}`}>
-      <div className="problem-solution-bg"></div>
+    <section
+      ref={sectionRef}
+      id="psx-problem-solution"
+      className={`psx-section ${visible ? "psx-show" : ""}`}
+    >
+      <div className="psx-bg" />
 
-      <div className="problem-solution-container">
-        <div className="section-header">
-          <h2 className="section-title">
-            Stop Juggling Multiple Subscriptions. Start Managing Your Hospital.
+      <div className="psx-wrapper">
+        <header className="psx-header">
+          <h2 className="psx-title">
+            Stop Juggling Multiple Subscriptions.  
+            Start Managing Your Hospital.
           </h2>
-        </div>
+        </header>
 
-        <div className="comparison-grid">
-          <div className="comparison-column problem-column">
-            <h3 className="column-title">
-              <X size={28} className="column-icon" />
-              The "Frankenstein" Approach
+        <div className="psx-grid">
+          {/* PROBLEM COLUMN */}
+          <div className="psx-column psx-problem-col">
+            <h3 className="psx-column-title psx-problem-title">
+              <X className="psx-icon psx-problem-icon" size={28} />
+              The “Frankenstein” Approach
             </h3>
-            <div className="comparison-items">
-              {problems.map((item, index) => (
-                <div key={index} className="comparison-item problem-item">
-                  <h4 className="item-title">{item.title}</h4>
-                  <p className="item-description">{item.problem}</p>
+
+            <div className="psx-items">
+              {data.map((item, i) => (
+                <div key={i} className="psx-card psx-problem-card">
+                  <h4 className="psx-card-title">{item.title}</h4>
+                  <p className="psx-card-text">{item.problem}</p>
                 </div>
               ))}
-              <div className="result-box problem-result">
-                <strong>The Result:</strong> Data silos, double-entry errors, and expensive monthly subscriptions.
+
+              <div className="psx-result psx-problem-result">
+                <strong>The Result:</strong> Data silos, double entry,
+                expensive subscriptions.
               </div>
             </div>
           </div>
 
-          <div className="comparison-column solution-column">
-            <h3 className="column-title">
-              <Check size={28} className="column-icon" />
-              The Unified HMS
+          {/* SOLUTION COLUMN */}
+          <div className="psx-column psx-solution-col">
+            <h3 className="psx-column-title psx-solution-title">
+              <Check className="psx-icon psx-solution-icon" size={28} />
+              HASHVERX Unified HMS
             </h3>
-            <div className="comparison-items">
-              {problems.map((item, index) => (
-                <div key={index} className="comparison-item solution-item">
-                  <h4 className="item-title">{item.title}</h4>
-                  <p className="item-description">{item.solution}</p>
+
+            <div className="psx-items">
+              {data.map((item, i) => (
+                <div key={i} className="psx-card psx-solution-card">
+                  <h4 className="psx-card-title">{item.title}</h4>
+                  <p className="psx-card-text">{item.solution}</p>
                 </div>
               ))}
-              <div className="result-box solution-result">
-                <strong>The Result:</strong> One database. One subscription. Zero data duplication.
+
+              <div className="psx-result psx-solution-result">
+                <strong>The Result:</strong> One database. One system.
+                Zero duplication.
               </div>
             </div>
           </div>

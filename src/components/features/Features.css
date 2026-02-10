@@ -12,6 +12,7 @@
 .section-header {
   text-align: center;
   margin-bottom: 2.5rem;
+  margin-top: -45px;
 }
 
 .section-title {
@@ -39,7 +40,7 @@
   box-shadow: 0 16px 42px -10px rgba(59, 130, 246, 0.16);
   border: 1px solid rgba(59, 130, 246, 0.1);
   background: white;
-  height: 550px;           /* fixed height – content must fit */
+  height: 550px;
 }
 
 /* ================= SIDEBAR (left) ================= */
@@ -52,6 +53,10 @@
   border-right: 1px solid #e2e8f0;
   overflow-y: auto;
   overflow-x: hidden;
+  /* FIX: prevent sidebar from growing beyond its column width */
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .features-sidebar::-webkit-scrollbar {
@@ -75,12 +80,14 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: #334155;
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  min-width: 0;
+  /* FIX: consistent box model, text wraps cleanly inside column */
   width: 100%;
   box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
   line-height: 1.35;
   text-align: left;
 }
@@ -96,19 +103,29 @@
   transform: translateX(3px);
 }
 
+/* FIX: icon never shrinks or grows */
 .feature-menu-item svg {
   flex-shrink: 0;
+  flex-grow: 0;
   width: 18px;
   height: 18px;
+}
+
+/* FIX: text span takes remaining space without overflowing */
+.feature-menu-item span {
+  min-width: 0;
+  overflow: hidden;
+  display: block;
 }
 
 /* ================= DETAIL AREA (right) – NO SCROLLBAR ================= */
 .features-detail-wrapper {
   padding: 2.2rem 2.2rem 2.6rem;
   background: linear-gradient(135deg, #ffffff, #f8fbff);
-  overflow: hidden;               /* ← removed scrollbar */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-width: 0; /* FIX: prevent detail area from overflowing grid */
 }
 
 .feature-detail {
@@ -116,7 +133,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 2.2rem;
   align-items: start;
-  flex: 1;                        /* take available height */
+  flex: 1;
   min-height: 0;
 }
 
@@ -154,7 +171,7 @@
   flex-direction: column;
   gap: 1.2rem;
   min-width: 0;
-  overflow: hidden;               /* prevent text overflow issues */
+  overflow: hidden;
 }
 
 .feature-icon-large {
@@ -181,6 +198,9 @@
   color: #0f172a;
   margin: 0;
   line-height: 1.2;
+  /* FIX: long headlines don't blow out container */
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .feature-description {
@@ -188,6 +208,9 @@
   line-height: 1.6;
   color: #475569;
   margin: 0;
+  /* FIX: long words/urls don't overflow */
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .feature-capabilities {
@@ -195,7 +218,7 @@
   padding: 1.3rem;
   border-radius: 12px;
   border: 1px solid #bfdbfe;
-  margin-top: auto;               /* push to bottom if space allows */
+  margin-top: auto;
 }
 
 .capabilities-title {
@@ -220,6 +243,14 @@
   font-size: 0.92rem;
   line-height: 1.5;
   color: #334155;
+  /* FIX: prevent capability text from overflowing */
+  min-width: 0;
+}
+
+.capability-item > *:last-child {
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .capability-icon {
@@ -289,33 +320,50 @@
   }
 
   .features-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;   /* stack: sidebar on top, detail below */
     height: auto;
     border-radius: 14px;
   }
 
+  /* FIX: horizontal pill-scroll sidebar */
   .features-sidebar {
-    max-height: 160px;
+    max-height: none;             /* don't restrict height when horizontal */
     flex-direction: row;
     flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
     border-right: none;
     border-bottom: 1px solid #e2e8f0;
     padding: 1rem;
     gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .features-sidebar::-webkit-scrollbar {
     height: 4px;
   }
 
+  /* FIX: each pill is a fixed-size chip — text stays on one line */
   .feature-menu-item {
-    flex-shrink: 0;
-    white-space: nowrap;
-    padding: 0.7rem 1.1rem;
+    flex-shrink: 0;               /* never squeeze the chip */
+    flex-grow: 0;
+    width: auto;                  /* override 100% width from base */
+    max-width: 180px;             /* cap so very long labels wrap gracefully */
+    white-space: normal;          /* allow 2-line wrap inside the cap */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    padding: 0.7rem 1rem;
     font-size: 0.86rem;
     border-radius: 9px;
+    /* FIX: align icon + text nicely in the pill */
+    align-items: flex-start;
+  }
+
+  .feature-menu-item span {
+    display: block;
+    min-width: 0;
   }
 
   .features-detail-wrapper {
@@ -352,11 +400,11 @@
   }
 
   .features-sidebar {
-    max-height: 140px;
     padding: 0.9rem;
   }
 
   .feature-menu-item {
+    max-width: 160px;
     padding: 0.65rem 1rem;
     font-size: 0.84rem;
   }
@@ -382,6 +430,12 @@
 @media (max-width: 480px) {
   .features-section {
     padding: 2rem 0.8rem 1.8rem;
+  }
+
+  .feature-menu-item {
+    max-width: 140px;
+    font-size: 0.82rem;
+    padding: 0.6rem 0.85rem;
   }
 
   .feature-headline {
