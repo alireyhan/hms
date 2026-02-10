@@ -6,10 +6,9 @@ import ProblemSolution from "./components/ProblemSolution/page";
 import Features from "./components/features/Features";
 import Process from "./components/process/Process";
 import WhyUs  from "./components/why/whyUs";   
-
-
 import Testimonials from "./components/testimonials/Testimonials";
 import Footer from "./components/footer/Footer";
+// import HealthcareExpertise from './components/healthexpert/Healthcare';
 
 function App() {
   return (
@@ -19,6 +18,7 @@ function App() {
      <Header/>
      <HeroSection/>
      <ProblemSolution/>
+     {/* <HealthcareExpertise/> */}
      <Features/>
      <Process/>
      <WhyUs/>

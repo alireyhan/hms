@@ -1,172 +1,452 @@
-.process-section {
-  padding: 6rem 2rem;
-  background: linear-gradient(90deg, #ffffff 0%, #c3d8f4 100%);
+/* ================= SECTION ================= */
+.pf-section {
+  padding: 7rem 2rem 8rem;
   position: relative;
-  overflow: hidden;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  isolation: isolate;
 }
 
-.process-section::before {
-  content: '';
+.pf-bg-gradient {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 50%);
-  pointer-events: none;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(59,130,246,0.1), transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(139,92,246,0.08), transparent 70%);
 }
 
-.process-container {
-  max-width: 1400px;
-  margin: 0 auto;
+/* ================= CONTAINER ================= */
+.pf-container {
+  max-width: 1200px;
+  margin: auto;
   position: relative;
   z-index: 1;
 }
 
-.section-header {
+/* ================= HEADER ================= */
+.pf-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 1rem 0;
-  letter-spacing: -0.02em;
+.pf-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.8rem;
 }
 
-.section-description {
-  font-size: 1.25rem;
-  color: #64748b;
-  margin: 0;
+.pf-subtitle {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  max-width: 700px;
+  margin: auto;
 }
 
-.process-timeline {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+/* ================= TIMELINE ================= */
+.pf-timeline-wrapper {
   position: relative;
+  padding: 4rem 0 3rem;
 }
 
-.process-step {
-  background: linear-gradient(120deg, #ffffff 0%, #adcdf6 100%);
-  padding: 2.5rem 2rem;
-  border-radius: 16px;
-  border: 2px solid #e2e8f0;
-  position: relative;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.process-step:hover {
-  transform: translateY(-10px);
-  border-color: #3b82f6;
-  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.2);
-}
-
-.step-number {
+.pf-timeline-line {
   position: absolute;
-  top: -20px;
+  top: 50%;
+  width: 100%;
+  height: 140px;
+  transform: translateY(-50%);
+}
+
+/* ================= STEPS ================= */
+.pf-steps {
+  display: flex;
+  gap: 1.6rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* ================= CARD ================= */
+.pf-card {
+  background: rgba(255,255,255,0.88);
+  border-radius: 20px;
+  padding: 3.4rem 1.6rem 2rem;
+  text-align: center;
+  flex: 1;
+  position: relative;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pf-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* ================= STEP NUMBER ================= */
+.pf-step-number-wrapper {
+  position: absolute;
+  top: -26px;
   left: 50%;
   transform: translateX(-50%);
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  color: white;
+}
+
+.pf-step-number {
+  width: 50px;
+  height: 50px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 1.25rem;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
-.step-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+/* ================= ICON ================= */
+.pf-step-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.2rem;
   border-radius: 16px;
+  background: linear-gradient(145deg, #f0f9ff, #dbeafe);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #3b82f6;
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
+  color: #1d4ed8;
+  transition: 0.4s ease;
 }
 
-.process-step:hover .step-icon {
-  transform: scale(1.1) rotate(5deg);
+.pf-card:hover .pf-step-icon {
+  background: linear-gradient(145deg, #60a5fa, #3b82f6);
+  color: #fff;
 }
 
-.step-title {
-  font-size: 1.5rem;
+/* ================= TEXT ================= */
+.pf-step-title {
+  font-size: 1.25rem;
   font-weight: 700;
   color: #0f172a;
-  margin: 0 0 1rem 0;
+  margin-bottom: 0.6rem;
 }
 
-.step-description {
+.pf-step-desc {
   font-size: 0.95rem;
-  line-height: 1.6;
-  color: #64748b;
-  margin: 0;
+  color: #475569;
+  line-height: 1.55;
 }
 
-.step-connector {
-  position: absolute;
-  top: 50%;
-  right: -2rem;
-  transform: translateY(-50%);
-  color: #000000;
-  opacity: 0.5;
-  animation: slideRight 2s ease-in-out infinite;
-}
+/* ================= RESPONSIVE ================= */
 
-@keyframes slideRight {
-  0%,
-  100% {
-    transform: translateY(-50%) translateX(0);
-    opacity: 0.3;
+/* Large Desktop — 1280px+ */
+@media (min-width: 1280px) {
+  .pf-section {
+    padding: 8rem 3rem 9rem;
   }
-  50% {
-    transform: translateY(-50%) translateX(5px);
-    opacity: 0.7;
+
+  .pf-title {
+    font-size: 2.6rem;
+            margin-top: -58px;
+  }
+
+  .pf-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .pf-card {
+    padding: 3.8rem 2rem 2.4rem;
+  }
+
+  .pf-step-title {
+    font-size: 1.3rem;
+  }
+
+  .pf-step-desc {
+    font-size: 1rem;
   }
 }
 
+/* Desktop — 1025px to 1279px */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .pf-section {
+    padding: 7rem 2rem 8rem;
+  }
+
+  .pf-steps {
+    gap: 1.4rem;
+  }
+
+  .pf-card {
+    padding: 3.4rem 1.4rem 2rem;
+  }
+}
+
+/* Tablet Landscape — 769px to 1024px */
 @media (max-width: 1024px) {
-  .process-timeline {
-    grid-template-columns: repeat(2, 1fr);
+  .pf-section {
+    padding: 5.5rem 2rem 6.5rem;
   }
-  .step-connector {
-    display: none;
-  }
-  .section-title {
+
+  .pf-title {
     font-size: 2rem;
   }
+
+  .pf-subtitle {
+    font-size: 1rem;
+  }
+
+  .pf-steps {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3.5rem 1.6rem;
+  }
+
+  .pf-card {
+    flex: 0 1 46%;
+    min-width: 260px;
+  }
+
+  .pf-timeline-line {
+    display: none;
+  }
+
+  .pf-timeline-wrapper {
+    padding: 2rem 0;
+  }
 }
 
+/* Tablet Portrait — 641px to 768px */
 @media (max-width: 768px) {
-  .process-section {
-    padding: 4rem 1.5rem;
+  .pf-section {
+    padding: 4.5rem 1.5rem 5.5rem;
   }
-  .process-timeline {
-    grid-template-columns: 1fr;
-    gap: 3.5rem;
+
+  .pf-title {
+    font-size: 1.8rem;
   }
-  .section-title {
-    font-size: 1.75rem;
+
+  .pf-subtitle {
+    font-size: 0.95rem;
+    max-width: 100%;
   }
-  .process-step {
-    padding: 2rem 1.5rem;
+
+  .pf-steps {
+    gap: 3.5rem 1.4rem;
+  }
+
+  .pf-card {
+    flex: 0 1 48%;
+    min-width: 240px;
+    padding: 3rem 1.4rem 1.8rem;
+  }
+
+  .pf-step-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .pf-step-title {
+    font-size: 1.15rem;
+  }
+
+  .pf-step-desc {
+    font-size: 0.9rem;
   }
 }
 
-.process-step {
-  will-change: transform, opacity;
+/* Large Mobile — 481px to 640px */
+@media (max-width: 640px) {
+  .pf-section {
+    padding: 4rem 1.25rem 5rem;
+  }
+
+  .pf-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .pf-title {
+    font-size: 1.65rem;
+  }
+
+  .pf-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .pf-steps {
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .pf-card {
+    flex: none;
+    width: 100%;
+    max-width: 440px;
+    margin: auto;
+    padding: 3rem 1.6rem 1.8rem;
+  }
+
+  .pf-step-number {
+    width: 46px;
+    height: 46px;
+    font-size: 1.2rem;
+  }
+
+  .pf-timeline-wrapper {
+    padding: 1.5rem 0;
+  }
+}
+
+/* Mobile — 361px to 480px */
+@media (max-width: 480px) {
+  .pf-section {
+    padding: 3.5rem 1rem 4.5rem;
+  }
+
+  .pf-title {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .pf-subtitle {
+    font-size: 0.88rem;
+  }
+
+  .pf-card {
+    max-width: 100%;
+    padding: 2.8rem 1.25rem 1.6rem;
+    border-radius: 16px;
+  }
+
+  .pf-step-number-wrapper {
+    top: -23px;
+  }
+
+  .pf-step-number {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  .pf-step-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+  }
+
+  .pf-step-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .pf-step-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .pf-step-desc {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+}
+
+/* Small Mobile — up to 360px */
+@media (max-width: 360px) {
+  .pf-section {
+    padding: 3rem 0.75rem 4rem;
+  }
+
+  .pf-title {
+    font-size: 1.35rem;
+  }
+
+  .pf-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .pf-card {
+    padding: 2.6rem 1rem 1.4rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+
+  .pf-step-number-wrapper {
+    top: -22px;
+  }
+
+  .pf-step-number {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+
+  .pf-step-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    margin-bottom: 0.9rem;
+  }
+
+  .pf-step-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .pf-step-title {
+    font-size: 1rem;
+  }
+
+  .pf-step-desc {
+    font-size: 0.82rem;
+  }
+}
+
+/* ================= LANDSCAPE ORIENTATION ================= */
+@media (max-height: 500px) and (orientation: landscape) {
+  .pf-section {
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .pf-title {
+    font-size: 1.5rem;
+  }
+
+  .pf-steps {
+    flex-wrap: wrap;
+    gap: 3rem 1.4rem;
+  }
+
+  .pf-card {
+    flex: 0 1 44%;
+  }
+
+  .pf-timeline-line {
+    display: none;
+  }
+}
+
+/* ================= TOUCH DEVICES ================= */
+@media (hover: none) and (pointer: coarse) {
+  .pf-card:hover {
+    transform: none;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  }
+
+  .pf-card:hover .pf-step-icon {
+    background: linear-gradient(145deg, #f0f9ff, #dbeafe);
+    color: #1d4ed8;
+  }
+}
+
+/* ================= ACCESSIBILITY ================= */
+@media (prefers-reduced-motion: reduce) {
+  .pf-card,
+  .pf-step-icon {
+    transition: none;
+  }
+
+  .pf-card:hover {
+    transform: none;
+  }
 }
