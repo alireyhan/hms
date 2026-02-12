@@ -10,13 +10,14 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navItems = [
     { label: 'Home', href: '#home' },
-    { label: 'Problem/Solution', href: '#problem-solution' },
+    { label: 'Problem/Solution', href: '#psx-problem-solution' }, // ✅ FIX ONLY
     { label: 'Features', href: '#features' },
     { label: 'Process', href: '#process' },
     { label: 'Why Us', href: '#why-us' },
@@ -35,11 +36,14 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
+
+        {/* LOGO */}
         <div className="header-logo">
           <span className="logo-text">HMS</span>
           <span className="logo-subtitle">Hospital Management System</span>
         </div>
 
+        {/* NAV */}
         <nav className={`header-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           {navItems.map((item) => (
             <a
@@ -53,19 +57,24 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* <button 
+        {/* CTA (kept exactly as you had it, commented) */}
+        {/*
+        <button 
           className="cta-button"
           onClick={() => alert('Demo request submitted!')}
         >
           Request a Demo
-        </button> */}
+        </button>
+        */}
 
+        {/* MOBILE TOGGLE */}
         <button
           className="mobile-menu-toggle"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
+
       </div>
     </header>
   );

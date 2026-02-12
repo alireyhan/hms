@@ -84,9 +84,7 @@
   display: flex;
   align-items: center;
   gap: 1.25rem;
-
-  /* ── KEY FIX: remove the hard-coded margin-left that caused overflow ── */
-  /* Use flex auto margin instead to push nav to center/right naturally */
+margin-right: -200px; /* Negative margin to allow nav to extend beyond header on large screens without breaking layout */
   flex: 1;
   justify-content: center;
 

@@ -3,10 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import * as Icons from 'lucide-react';
 import './Features.css';
 
-import img1 from '../../assets/hero-bg.png';
-import img2 from '../../assets/logo1.png';
-import img3 from '../../assets/logo2.png';
-import img4 from '../../assets/logo3.png';
+import img1 from '../../assets/patient.png';
+import img2 from '../../assets/appoinment.png';
+import img3 from '../../assets/clinicalnotes.png';
+// import img4 from '../../assets/encounter.png';
+import img5 from '../../assets/laborder.png';
+import img6 from '../../assets/pescription.png';  
+import img7 from '../../assets/vital.png';
 
 const featuresData = [
   {
@@ -14,7 +17,7 @@ const featuresData = [
     title: 'Patient Registration & History (The Entry Point)',
     headline: 'One Patient, One Record',
     icon: 'FileText',
-    image: 'https://via.placeholder.com/720x450?text=Patient+Profile',
+    image: img1,
     description: 'Centralized patient data management with secure, CBAHI-compliant archiving.',
     capabilities: [
       'Centralized Data: Demographics, history, and documents in one view',
@@ -27,7 +30,7 @@ const featuresData = [
     title: 'Appointments & Encounters (The Interaction)',
     headline: 'Seamless Patient Flow',
     icon: 'Calendar',
-    image: img3,
+    image: img2,
     description: 'Smart scheduling with real-time queue management and encounter tracking.',
     capabilities: [
       'Smart Scheduling: Drag-and-drop booking with conflict detection',
@@ -38,160 +41,165 @@ const featuresData = [
   {
     id: 3,
     title: 'Vital Signs & Triage (The Assessment)',
-    headline: 'Rapid Clinical Documentation',
-    icon: 'Stethoscope',
-    image: img4,
-    description: 'Smart templates and AI-assisted documentation for faster charting.',
+    headline: 'Rapid Clinical Assessment',
+    icon: 'HeartPulse',
+    image: img7,
+    description: 'Quick capture of vitals with smart alerts and trending visualization.',
     capabilities: [
-      'Smart Templates: Pre-built forms for SOAP notes and discharge summaries',
-      'Vitals Trending: Visual graphs for BP, Pulse, and Temperature history',
-      'Voice-to-Text: AI-assisted dictation for faster charting'
+      'Auto-calculated scores: NEWS, MEWS, qSOFA',
+      'Abnormal value highlighting & alerts',
+      'Historical trending graphs'
     ]
   },
   {
     id: 4,
     title: 'Clinical Notes & Diagnosis (The Consultation)',
-    headline: 'Rapid Clinical Documentation',
-    icon: 'Stethoscope',
-    image: img4,
-    description: 'Smart templates and AI-assisted documentation for faster charting.',
+    headline: 'Intelligent Documentation',
+    icon: 'FileSignature',
+    image: img3,
+    description: 'Structured, searchable clinical notes with smart templates.',
     capabilities: [
-      'Smart Templates: Pre-built forms for SOAP notes and discharge summaries',
-      'Vitals Trending: Visual graphs for BP, Pulse, and Temperature history',
-      'Voice-to-Text: AI-assisted dictation for faster charting'
+      'SOAP & Progress Notes with auto-fill',
+      'ICD-10 / SNOMED CT diagnosis coding',
+      'Attachment support (photos, PDFs, scans)'
     ]
   },
   {
     id: 5,
     title: 'Lab, Imaging & Diagnostic Orders (The Investigation)',
-    headline: 'Integrated Diagnostics',
+    headline: 'Integrated Order & Results',
     icon: 'TestTube',
-    image: 'https://via.placeholder.com/720x450?text=Lab+%26+Imaging+Orders',
-    description: 'Seamless diagnostic ordering with automatic result syncing.',
+    image: img5,
+    description: 'Seamless ordering with automatic result integration and tracking.',
     capabilities: [
-      'Direct Ordering: Request labs/imaging from the consultation screen',
-      'PACS/LIMS Link: Auto-sync results back to the patient file',
-      'Status Tracking: Monitor "Sample Collected" to "Result Ready"'
+      'Order from consultation screen',
+      'Auto-sync lab/imaging results',
+      'Real-time status updates'
     ]
   },
   {
     id: 6,
     title: 'Prescriptions & Procedures (The Treatment)',
-    headline: 'Error-Free Dispensing',
+    headline: 'Safe & Digital Prescribing',
     icon: 'Pill',
-    image: 'https://via.placeholder.com/720x450?text=e-Prescriptions',
-    description: 'Digital prescriptions with automated safety checks and drug interaction alerts.',
+    image: img6,
+    description: 'Electronic prescriptions with drug interaction checking and templates.',
     capabilities: [
-      'e-Prescribing: Digital orders sent instantly to the pharmacy',
-      'Drug Interaction Alerts: Automated safety warnings for doctors',
-      'Dosage Templates: Standardized protocols for common treatments'
+      'e-Prescribing to in-house/outside pharmacy',
+      'Drug-allergy & interaction alerts',
+      'Procedure templates & documentation'
     ]
   },
-  {
-    id: 7,
-    title: 'Billing & Payments (The Transaction)',
-    headline: 'Automated Financials',
-    icon: 'Receipt',
-    image: img1,
-    description: 'ZATCA-compliant e-invoicing with unified billing across all departments.',
-    capabilities: [
-      'ZATCA E-Invoicing: Fully compliant QR code generation',
-      'Unified Billing: Combines pharmacy, lab, and consult charges automatically',
-      'Payment Gateways: Supports cash, card, and insurance split-payments'
-    ]
-  },
-  {
-    id: 8,
-    title: 'Doctor Commission & Revenue (The Incentive)',
-    headline: 'Transparent Incentives',
-    icon: 'DollarSign',
-    image: 'https://via.placeholder.com/720x450?text=Doctor+Commission+Dashboard',
-    description: 'Automated commission calculations with real-time earnings tracking.',
-    capabilities: [
-      'Auto-Calculation: Commission generated instantly upon invoice payment',
-      'Flexible Rules: Set different rates for procedures, consults, or pharmacy',
-      'Performance Reports: Real-time earnings dashboard for doctors'
-    ]
-  },
-  {
-    id: 9,
-    title: 'Inventory & Pharmacy (The Fulfillment)',
-    headline: 'Smart Supply Chain',
-    icon: 'Package',
-    image: 'https://via.placeholder.com/720x450?text=Inventory+%26+Stock',
-    description: 'Live stock tracking with expiry alerts and auto-replenishment.',
-    capabilities: [
-      'Live Deduction: Stock decreases instantly when medicine is dispensed',
-      'Expiry Tracking: Alerts for near-expiry batches (CBAHI Requirement)',
-      'Auto-Replenishment: Purchase orders generated when stock hits low levels'
-    ]
-  },
-  {
-    id: 10,
-    title: 'Insurance Policies & Claims (The Reimbursement)',
-    headline: 'NPHIES-Ready Insurance',
-    icon: 'Shield',
-    image: img2,
-    description: 'Real-time eligibility checks and automated claims management.',
-    capabilities: [
-      'Real-Time Eligibility: Instant NPHIES check before consultation',
-      'Claims Management: Automated scrubbing to reduce rejections',
-      'Policy Rules: Auto-apply co-pays and deductibles'
-    ]
-  },
-  {
-    id: 11,
-    title: 'Staff Management (Doctors, Nurses, Admin, Support Staff)',
-    headline: 'Unified Workforce Control',
-    icon: 'Users',
-    image: 'https://via.placeholder.com/720x450?text=Staff+%26+Roster',
-    description: 'Comprehensive staff management with role-based access and automated rostering.',
-    capabilities: [
-      'Role-Based Access: Secure permissions for Doctors, Nurses, and Admin',
-      'Shift Management: Automated rostering and attendance tracking',
-      'HR Integration: Linked directly to payroll and performance KPIs'
-    ]
-  },
-  {
-    id: 12,
-    title: 'Audit Logs & Compliance (The Governance)',
-    headline: 'Accreditation Ready',
-    icon: 'FileCheck',
-    image: 'https://via.placeholder.com/720x450/1e40af/ffffff?text=Audit+Logs+%26+Compliance',
-    description: 'Complete audit trail with HIPAA-compliant data encryption.',
-    capabilities: [
-      'Full Traceability: Every view, edit, and print is logged with a timestamp',
-      'User Activity: Monitor access logs for security audits',
-      'Security Standards: HIPAA-compliant data encryption and role-based privacy protocols'
-    ]
-  }
-];
+//   {
+//     id: 7,
+//     title: 'Billing & Payments (The Transaction)',
+//     headline: 'Automated & Compliant Billing',
+//     icon: 'Receipt',
+//     image: img2,
+//     description: 'ZATCA-compliant e-invoicing with unified multi-department billing.',
+//     capabilities: [
+//       'Automatic charge aggregation',
+//       'ZATCA QR code generation',
+//       'Multiple payment methods support'
+//     ]
+//   },
+//   {
+//     id: 8,
+//     title: 'Doctor Commission & Revenue (The Incentive)',
+//     headline: 'Transparent Earnings Tracking',
+//     icon: 'DollarSign',
+//     image: img1,
+//     description: 'Automated commission calculation with real-time doctor dashboards.',
+//     capabilities: [
+//       'Rule-based commission structure',
+//       'Instant commission on paid invoices',
+//       'Doctor performance & earnings reports'
+//     ]
+//   },
+//   {
+//     id: 9,
+//     title: 'Inventory & Pharmacy (The Fulfillment)',
+//     headline: 'Smart Stock Management',
+//     icon: 'Package',
+//     image: img5,
+//     description: 'Real-time inventory with expiry tracking and auto-reorder.',
+//     capabilities: [
+//       'Automatic stock deduction on dispense',
+//       'Near-expiry & low-stock alerts',
+//       'Purchase order generation'
+//     ]
+//   },
+//   {
+//     id: 10,
+//     title: 'Insurance Policies & Claims (The Reimbursement)',
+//     headline: 'NPHIES-Ready Insurance Handling',
+//     icon: 'Shield',
+//     image: img2,
+//     description: 'Real-time eligibility checks and automated claims processing.',
+//     capabilities: [
+//       'Instant NPHIES eligibility verification',
+//       'Automated claim scrubbing',
+//       'Co-pay & deductible auto-application'
+//     ]
+//   },
+//   {
+//     id: 11,
+//     title: 'Staff Management (Doctors, Nurses, Admin, Support Staff)',
+//     headline: 'Unified Workforce Control',
+//     icon: 'Users',
+//     image: img4,
+//     description: 'Role-based access, rostering, and performance tracking for all staff.',
+//     capabilities: [
+//       'Granular role-based permissions',
+//       'Automated shift scheduling',
+//       'Attendance & payroll integration'
+//     ]
+//   },
+//   {
+//     id: 12,
+//     title: 'Audit Logs & Compliance (The Governance)',
+//     headline: 'Accreditation-Ready Traceability',
+//     icon: 'FileCheck',
+//     image: img3,
+//     description: 'Complete audit trail with strong encryption and access logging.',
+//     capabilities: [
+//       'Timestamped action logging',
+//       'User activity monitoring',
+//       'HIPAA / CBAHI compliant protocols'
+//     ]
+//   }
+ ];
 
 const Features = () => {
   const [selectedFeature, setSelectedFeature] = useState(featuresData[0]);
 
   const getIcon = (iconName) => {
     const IconComponent = Icons[iconName];
-    return IconComponent ? <IconComponent size={24} strokeWidth={2.2} /> : <Icons.Settings size={24} />;
+    return IconComponent ? (
+      <IconComponent size={24} strokeWidth={2.3} />
+    ) : (
+      <Icons.Settings size={24} />
+    );
   };
 
   const contentVariants = {
-    hidden: { opacity: 0, y: 20, filter: 'blur(4px)' },
-    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-    exit: { opacity: 0, y: -15, filter: 'blur(6px)', transition: { duration: 0.3 } }
+    hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.55 } },
+    exit: { opacity: 0, y: -16, filter: 'blur(8px)', transition: { duration: 0.32 } }
   };
 
-  const listItemVariants = {
-    hidden: { opacity: 0, x: -15 },
-    visible: (i) => ({
-      opacity: 1,
-      x: 0,
-      transition: { delay: i * 0.06 + 0.1, duration: 0.35 }
-    })
+  const listVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.07 } }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 }
   };
 
   return (
-    <section id="features" className="features-section">
+    <section className="features-section" id="features">
       <div className="features-container">
         <div className="section-header">
           <h2 className="section-title">Core Features</h2>
@@ -201,21 +209,24 @@ const Features = () => {
         </div>
 
         <div className="features-layout">
-          {/* LEFT SIDEBAR - Feature selection */}
+          {/* Sidebar */}
           <div className="features-sidebar">
             {featuresData.map((feature) => (
               <button
                 key={feature.id}
                 className={`feature-menu-item ${selectedFeature.id === feature.id ? 'active' : ''}`}
                 onClick={() => setSelectedFeature(feature)}
+                type="button"
               >
-                <span className="feature-menu-icon">{getIcon(feature.icon)}</span>
+                <div className="feature-menu-icon-wrapper">
+                  {getIcon(feature.icon)}
+                </div>
                 <span className="feature-menu-text">{feature.title}</span>
               </button>
             ))}
           </div>
 
-          {/* RIGHT MAIN CONTENT - No scrollbar */}
+          {/* Detail view */}
           <div className="features-detail-wrapper">
             <AnimatePresence mode="wait">
               <motion.div
@@ -226,19 +237,17 @@ const Features = () => {
                 animate="visible"
                 exit="exit"
               >
-                {/* Image column */}
                 <div className="feature-image-column">
                   <div className="feature-image-wrapper">
                     <img
                       src={selectedFeature.image}
-                      alt={`${selectedFeature.title} screenshot`}
+                      alt={`${selectedFeature.headline} illustration`}
                       className="feature-image"
                       loading="lazy"
                     />
                   </div>
                 </div>
 
-                {/* Text column */}
                 <div className="feature-text-column">
                   <div className="feature-icon-large">
                     {getIcon(selectedFeature.icon)}
@@ -246,34 +255,30 @@ const Features = () => {
 
                   <h3 className="feature-headline">{selectedFeature.headline}</h3>
 
-                  <p className="feature-description">
-                    {selectedFeature.description}
-                  </p>
+                  <p className="feature-description">{selectedFeature.description}</p>
 
-                  <div className="feature-capabilities">
+                  <motion.div
+                    className="feature-capabilities"
+                    variants={listVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
                     <h4 className="capabilities-title">Key Capabilities:</h4>
                     <ul className="capabilities-list">
-                      {selectedFeature.capabilities.map((capability, index) => {
-                        const [title, desc] = capability.split(':');
+                      {selectedFeature.capabilities.map((cap, idx) => {
+                        const [label, value] = cap.split(':').map(s => s.trim());
                         return (
-                          <motion.li
-                            key={index}
-                            className="capability-item"
-                            custom={index}
-                            variants={listItemVariants}
-                            initial="hidden"
-                            animate="visible"
-                          >
-                            <Icons.CheckCircle size={18} className="capability-icon" />
+                          <motion.li key={idx} className="capability-item" variants={itemVariants}>
+                            <Icons.CheckCircle2 size={18} className="capability-icon" />
                             <div>
-                              <strong>{title.trim()}:</strong>
-                              {desc && <span> {desc.trim()}</span>}
+                              <strong>{label}</strong>
+                              {value && <span> : {value}</span>}
                             </div>
                           </motion.li>
                         );
                       })}
                     </ul>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </AnimatePresence>

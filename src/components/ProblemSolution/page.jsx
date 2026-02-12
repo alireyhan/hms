@@ -43,7 +43,7 @@ const ProblemSolution = () => {
   return (
     <section
       ref={sectionRef}
-      id="psx-problem-solution"
+      id="psx-problem-solution" 
       className={`psx-section ${visible ? "psx-show" : ""}`}
     >
       <div className="psx-bg" />
@@ -57,6 +57,7 @@ const ProblemSolution = () => {
         </header>
 
         <div className="psx-grid">
+
           {/* PROBLEM COLUMN */}
           <div className="psx-column psx-problem-col">
             <h3 className="psx-column-title psx-problem-title">
@@ -100,6 +101,7 @@ const ProblemSolution = () => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>

@@ -12,7 +12,7 @@
 .section-header {
   text-align: center;
   margin-bottom: 2.5rem;
-  margin-top: -45px;
+  margin-top: -40px;
 }
 
 .section-title {
@@ -46,14 +46,14 @@
 /* ================= SIDEBAR (left) ================= */
 .features-sidebar {
   background: #f8fafc;
-  padding: 1.4rem 0.75rem;
+  /* FIX: extra horizontal padding so icons are never clipped */
+  padding: 1.4rem 1rem 1.4rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
   border-right: 1px solid #e2e8f0;
   overflow-y: auto;
   overflow-x: hidden;
-  /* FIX: prevent sidebar from growing beyond its column width */
   min-width: 0;
   width: 100%;
   box-sizing: border-box;
@@ -69,8 +69,8 @@
 
 .feature-menu-item {
   display: flex;
-  align-items: center;
-  gap: 0.65rem;
+  align-items: flex-start;  /* FIX: align to top so icon never gets cut */
+  gap: 0.7rem;
   padding: 0.85rem 0.9rem;
   background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
   border: 2px solid transparent;
@@ -80,7 +80,6 @@
   font-size: 0.85rem;
   font-weight: 600;
   color: #334155;
-  /* FIX: consistent box model, text wraps cleanly inside column */
   width: 100%;
   box-sizing: border-box;
   min-width: 0;
@@ -90,6 +89,8 @@
   overflow-wrap: anywhere;
   line-height: 1.35;
   text-align: left;
+  /* FIX: never clip contents */
+  overflow: visible;
 }
 
 .feature-menu-item:hover {
@@ -103,12 +104,16 @@
   transform: translateX(3px);
 }
 
-/* FIX: icon never shrinks or grows */
+/* FIX: icon sizing — never shrinks, never clips */
 .feature-menu-item svg {
   flex-shrink: 0;
   flex-grow: 0;
-  width: 18px;
-  height: 18px;
+  width: 20px;       /* FIX: slightly larger so strokes render fully */
+  height: 20px;
+  /* FIX: small top offset to align visually with first text line */
+  margin-top: 1px;
+  overflow: visible; /* FIX: SVG paths that extend to the edge won't be clipped */
+  display: block;
 }
 
 /* FIX: text span takes remaining space without overflowing */
@@ -118,21 +123,21 @@
   display: block;
 }
 
-/* ================= DETAIL AREA (right) – NO SCROLLBAR ================= */
+/* ================= DETAIL AREA (right) ================= */
 .features-detail-wrapper {
   padding: 2.2rem 2.2rem 2.6rem;
   background: linear-gradient(135deg, #ffffff, #f8fbff);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  min-width: 0; /* FIX: prevent detail area from overflowing grid */
+  min-width: 0;
 }
 
 .feature-detail {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 0.8fr;
   gap: 2.2rem;
-  align-items: start;
+  align-items: center; /* FIX: vertically center both columns relative to each other */
   flex: 1;
   min-height: 0;
 }
@@ -141,15 +146,23 @@
 .feature-image-column {
   position: relative;
   min-width: 0;
+  /* FIX: fill the full column height so centering works */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .feature-image-wrapper {
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 14px 38px rgba(59, 130, 246, 0.22);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  background: #f1f5f9;
-  margin-top: 130px;
+  box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3), 0 0 0 1px rgba(59, 130, 246, 0.1);
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  background: linear-gradient(135deg, #f8fafc, #e0f2fe);
+  /* FIX: remove the fixed margin-top that was pushing the image off-centre */
+  margin-top: 0;
+  width: 100%;
+  transition: all 0.4s ease;
 }
 
 .feature-image {
@@ -157,13 +170,11 @@
   height: auto;
   display: block;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.4s ease;
 }
 
-.feature-detail:hover .feature-image {
-  transform: scale(1.03);
-}
+
 
 /* ================= TEXT COLUMN ================= */
 .feature-text-column {
@@ -175,8 +186,8 @@
 }
 
 .feature-icon-large {
-  width: 64px;
-  height: 64px;
+  width: 42px;
+  height: 42px;
   background: linear-gradient(135deg, #e0f2fe, #bfdbfe);
   border-radius: 14px;
   color: #2563eb;
@@ -188,27 +199,26 @@
 }
 
 .feature-icon-large svg {
-  width: 34px;
-  height: 34px;
+  width: 22px;
+  height: 22px;
+  overflow: visible; /* FIX: icon paths never clipped inside the box */
 }
 
 .feature-headline {
-  font-size: 1.85rem;
-  font-weight: 800;
+  font-size: 1.3rem;
+  font-weight: 600;
   color: #0f172a;
   margin: 0;
   line-height: 1.2;
-  /* FIX: long headlines don't blow out container */
   word-break: break-word;
   overflow-wrap: anywhere;
 }
 
 .feature-description {
-  font-size: 1rem;
+  font-size: 0.82rem;
   line-height: 1.6;
   color: #475569;
   margin: 0;
-  /* FIX: long words/urls don't overflow */
   word-break: break-word;
   overflow-wrap: anywhere;
 }
@@ -222,8 +232,8 @@
 }
 
 .capabilities-title {
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 600;
   color: #1e293b;
   margin-bottom: 1rem;
 }
@@ -240,10 +250,9 @@
 .capability-item {
   display: flex;
   gap: 0.8rem;
-  font-size: 0.92rem;
+  font-size: 0.78rem;
   line-height: 1.5;
   color: #334155;
-  /* FIX: prevent capability text from overflowing */
   min-width: 0;
 }
 
@@ -257,6 +266,7 @@
   color: #3b82f6;
   margin-top: 3px;
   flex-shrink: 0;
+  overflow: visible; /* FIX: small check/bullet icons never clipped */
 }
 
 /* ────────────────────────────────────────────────
@@ -269,9 +279,9 @@
     grid-template-columns: 280px 1fr;
     height: 620px;
   }
-  .feature-headline { font-size: 2rem; }
-  .feature-icon-large { width: 72px; height: 72px; }
-  .feature-icon-large svg { width: 38px; height: 38px; }
+  .feature-headline { font-size: 1.45rem; }
+  .feature-icon-large { width: 48px; height: 48px; }
+  .feature-icon-large svg { width: 26px; height: 26px; }
 }
 
 /* 1280px – 1439px */
@@ -288,7 +298,7 @@
     grid-template-columns: 220px 1fr;
     height: 560px;
   }
-  .feature-image-wrapper { margin-top: 100px; }
+  /* FIX: no margin-top override needed — column is already flex-centred */
 }
 
 /* ≤ 1024px  (tablet landscape / small desktop) */
@@ -304,12 +314,13 @@
     gap: 1.8rem;
   }
 
-  .feature-image-wrapper {
-    margin-top: 0;
+  /* FIX: on single-column layout reset image column height */
+  .feature-image-column {
+    height: auto;
   }
 
   .feature-headline {
-    font-size: 1.65rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -320,14 +331,14 @@
   }
 
   .features-layout {
-    grid-template-columns: 1fr;   /* stack: sidebar on top, detail below */
+    grid-template-columns: 1fr;
     height: auto;
     border-radius: 14px;
   }
 
   /* FIX: horizontal pill-scroll sidebar */
   .features-sidebar {
-    max-height: none;             /* don't restrict height when horizontal */
+    max-height: none;
     flex-direction: row;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -345,20 +356,18 @@
     height: 4px;
   }
 
-  /* FIX: each pill is a fixed-size chip — text stays on one line */
   .feature-menu-item {
-    flex-shrink: 0;               /* never squeeze the chip */
+    flex-shrink: 0;
     flex-grow: 0;
-    width: auto;                  /* override 100% width from base */
-    max-width: 180px;             /* cap so very long labels wrap gracefully */
-    white-space: normal;          /* allow 2-line wrap inside the cap */
+    width: auto;
+    max-width: 180px;
+    white-space: normal;
     word-break: break-word;
     overflow-wrap: anywhere;
     padding: 0.7rem 1rem;
     font-size: 0.86rem;
     border-radius: 9px;
-    /* FIX: align icon + text nicely in the pill */
-    align-items: flex-start;
+    align-items: flex-start; /* FIX: keep icons top-aligned in pill chips */
   }
 
   .feature-menu-item span {
@@ -371,7 +380,7 @@
   }
 
   .feature-headline {
-    font-size: 1.55rem;
+    font-size: 1.15rem;
   }
 
   .feature-description {
@@ -379,13 +388,13 @@
   }
 
   .feature-icon-large {
-    width: 58px;
-    height: 58px;
+    width: 40px;
+    height: 40px;
   }
 
   .feature-icon-large svg {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -414,7 +423,7 @@
   }
 
   .feature-headline {
-    font-size: 1.4rem;
+    font-size: 1.05rem;
   }
 
   .feature-description {
@@ -439,7 +448,7 @@
   }
 
   .feature-headline {
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 
   .feature-description {
@@ -447,20 +456,20 @@
   }
 
   .feature-icon-large {
-    width: 52px;
-    height: 52px;
+    width: 38px;
+    height: 38px;
   }
 
   .feature-icon-large svg {
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
   }
 
   .capabilities-title {
-    font-size: 1.05rem;
+    font-size: 0.88rem;
   }
 
   .capability-item {
-    font-size: 0.88rem;
+    font-size: 0.75rem;
   }
 }
